@@ -29,6 +29,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:2.7.4")
 
+	implementation("org.springframework.boot:spring-boot-devtools")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
