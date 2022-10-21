@@ -9,36 +9,41 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">NotePLS</a>
+         <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="">All Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Categories</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Add note</a></li>
+            </ul>
+        </div>
     </nav>
 
     <div class="container">
 
         <div class="row justify-content-center">
-            <div class="col-auto">
+
+            <div class="col-auto" th:each="note : ${notes}">
                 <div class="card" style="width: 16em">
-                    <div class="card-header">
+                    <div class="card-header" th:text="${note.category}" th:if="${note.category} != null">
                         Personal category
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">My scriptures</h5>
+                        <h5 class="card-title" th:text="${note.title}">My scriptures</h5>
                         <p class="card-text">
-                        <ul>
-                            <li>John 3:15</li>
-                            <li>Gen 1:1</li>
-                        </ul>
-                        ...
+                            <div class="md-area">
+                                <md-block hmin="3" th:text="${note.content}"></md-block>
+                            </div>
                         </p>
                         <a href="" class="btn btn-primary">See full note</a>
                     </div>
-                    <div class="card-footer text-muted">
+                    <div class="card-footer text-muted" th:text="${#temporals.format(note.date, 'dd-MM-yyyy HH:mm')}" th:if="${note.date} != null">
                         2 days ago
                     </div>
                 </div>
             </div>
-            <div class="col-auto ">
+            <!-- <div class="col-auto ">
                 <div class="card" style="width: 16em">
                     <div class="card-header">
                         Personal category
@@ -100,12 +105,12 @@
                         2 days ago
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </div>
 
-
+    <script type="module" src="md-block/md-block.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 
