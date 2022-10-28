@@ -14,6 +14,6 @@ class DashboardController(private val dashboardService: DashboardService) {
     @GetMapping
     fun index(model: Model): String {
         model["notes"] = dashboardService.getNotes()
-        return "index"
+        return "pages/notes_dashboard"
     }
 }
