@@ -8,30 +8,56 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"
         th:href="@{bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../static/css/base.css" th:href="@{css/base.css}">
-    <script src="../../static/js/editor.js" th:src="@{js/editor.js}"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <title>NotePLS</title>
 </head>
 
 <body>
     <div th:replace="fragments/header.html :: nav"></div>
-    <form>
-        <div class="row">
-            <div class="col px-3 py-2">
 
-                <div class="form-group">
-                    <textarea class="form-control" id="raw-note-area"></textarea>
+    
+        <form class="h-100" method="post" action="">
+            <div class="row px-1 py-1">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">
+                        <i data-feather="save"></i>
+                        <span th:text="#{save}">Save</span>
+                    </button>
                 </div>
-
-            </div>
-            <div class="col">
-                <div id="note-preview">
+                <div class="col">
+        
+        
                 </div>
             </div>
+            <div class="row h-100">
+                <div class="col px-3 py-2">
+                    <div class="form-group h-100">
+                        <textarea class="form-control h-100" id="raw-note-area"></textarea>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header"></div>
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text">
+                                <div id="note-preview" class="h-100">
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         </div>
-    </form>
 
     <script type="module" src="../static/md-block/md-block.js" th:src="@{md-block/md-block.js}"></script>
     <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+    <script src="../../static/js/editor.js" th:src="@{js/editor.js}"></script>
+
+    <script>
+        feather.replace()
+    </script>
 </body>
 
 </html>

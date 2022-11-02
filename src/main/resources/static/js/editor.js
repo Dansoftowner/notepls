@@ -1,11 +1,15 @@
-document.onload = function() {
+const textArea = document.getElementById("raw-note-area");
+const notePreview = document.getElementById("note-preview");
 
-    alert("ON LOAD!");
-    const textArea = document.getElementById("raw-note-area");
-    const notePreview = document.getElementById("note-preview");
-
-    textArea.onchange = function() {
-        console.log("Note changed");
-        //notePreview.innerHTML = `<md-block>${textArea.value}</md-block>`
-    }
+function init() {
+    textArea.addEventListener("keypress", updateNotePreview);
+    textArea.addEventListener("keydown", updateNotePreview);
+    textArea.addEventListener("keyup", updateNotePreview);
 }
+
+function updateNotePreview() {
+    notePreview.innerHTML = `<md-block>${textArea.value}</md-block>`;
+}
+
+init();
+updateNotePreview();
