@@ -19,7 +19,8 @@
         <div th:replace="fragments/header.html :: nav"></div>
 
         <form id="note-form" class="h-100" method="post" action="">
-            <div class="row px-1 py-1">
+            <!-- Toolbar -->
+            <div class="row px-4 mt-2">
                 <div class="col">
                     <button type="submit" class="btn btn-primary">
                         <i data-feather="save"></i>
@@ -31,21 +32,23 @@
                         <i data-feather="image"></i>
                     </button>
                     <button id="text-preview-btn" class="btn btn-light">
-                        <i data-feather="type"></i>
+                        <i data-feather="edit"></i>
                     </button>
-                    <button id="full-preview-btn" class="btn btn-light">
+                    <button id="full-preview-btn" class="btn btn-primary">
                         <i data-feather="columns"></i>
                     </button>
                 </div>
             </div>
-            <div class="row h-100 preview-row">
-                <div class="col px-3 py-2">
+
+            <!-- Editor and preview -->
+            <div class="row h-100 preview-row px-4 mt-2">
+                <div class="col ">
                     <div class="form-group h-100">
                         <textarea class="form-control h-100" id="raw-note-area"></textarea>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card me-4" id="note-preview-card">
+                    <div class="card" id="note-preview-card">
                         <div class="card-header"></div>
                         <div class="card-body">
                             <h5 class="card-title"></h5>

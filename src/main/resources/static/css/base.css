@@ -23,7 +23,14 @@ body {
         "Noto Color Emoji";
 }
 
-.navbar {}
+.navbar .app-figure .span1 {
+    background-color: rgb(224, 223, 223);
+}
+
+.navbar .app-figure .span2 {
+    background-color: #0d6efd; 
+    color: white;
+}
 
 .card {
     margin-bottom: 20px;
