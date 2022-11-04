@@ -2,6 +2,7 @@ const textArea = document.getElementById("raw-note-area");
 const notePreview = document.getElementById("note-preview");
 
 function init() {
+    textArea.addEventListener("onchange", updateNotePreview);
     textArea.addEventListener("keypress", updateNotePreview);
     textArea.addEventListener("keydown", updateNotePreview);
     textArea.addEventListener("keyup", updateNotePreview);

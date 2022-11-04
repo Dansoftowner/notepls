@@ -7,6 +7,7 @@
     <title>Notepls</title>
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" th:href="@{bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../static/css/base.css" th:href="@{css/base.css}">
+    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body>
@@ -41,10 +42,14 @@
     </div>
 
     <div class="fixed-bottom p-3">
-        <a class="btn btn-primary float-end rounded-circle pt-1 px-3" style="font-size: 2em;" href="new">+</a>
+        <a class="btn btn-primary float-end rounded-circle pt-1 px-3" style="font-size: 2em;" href="new"><i data-feather="plus"></i></a>
     </div>
 
     <!-- <div th:replace="fragments/footer.html"></div> -->
+
+    <script>
+        feather.replace()
+    </script>
 
     <script type="module" src="../static/md-block/md-block.js" th:src="@{md-block/md-block.js}"></script>
     <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{bootstrap/js/bootstrap.min.js}"></script>
