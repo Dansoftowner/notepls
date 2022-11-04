@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 class NoteEditorController {
-    @RequestMapping("newnote")
+    @RequestMapping("new")
     fun getPage(): String {
-
         return "pages/note_editor.html"
     }
 }
