@@ -13,10 +13,12 @@
 </head>
 
 <body>
-    <div th:replace="fragments/header.html :: nav"></div>
-
     
-        <form class="h-100" method="post" action="">
+
+    <div class="root">
+        <div th:replace="fragments/header.html :: nav"></div>
+
+        <form id="note-form" class="h-100" method="post" action="">
             <div class="row px-1 py-1">
                 <div class="col">
                     <button type="submit" class="btn btn-primary">
@@ -24,9 +26,16 @@
                         <span th:text="#{save}">Save</span>
                     </button>
                 </div>
-                <div class="col">
-        
-        
+                <div id="preview-toolbar" class="col">
+                    <button id="view-preview-btn" class="btn btn-light">
+                        <i data-feather="image"></i>
+                    </button>
+                    <button id="text-preview-btn" class="btn btn-light">
+                        <i data-feather="type"></i>
+                    </button>
+                    <button id="full-preview-btn" class="btn btn-light">
+                        <i data-feather="monitor"></i>
+                    </button>
                 </div>
             </div>
             <div class="row h-100 preview-row">
@@ -49,6 +58,9 @@
                 </div>
             </div>
         </form>
+    </div>
+    
+        
 
     <script type="module" src="../static/md-block/md-block.js" th:src="@{md-block/md-block.js}"></script>
     <script src="../static/bootstrap/js/bootstrap.min.js" th:src="@{bootstrap/js/bootstrap.min.js}"></script>

@@ -1,5 +1,7 @@
 html, body {
     height: 90%;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar {
@@ -28,13 +30,26 @@ html, body {
     font-weight: bold;
 }
 
+.root {
+    height: 100%;
+    overflow-x: clip;
+}
+
+#preview-toolbar {
+    text-align: right;
+}
+
+#preview-toolbar button{
+    display: inline;
+}
 
 .preview-row col {
     max-height: 100%;
 }
 
 #note-preview-card {
-    max-height: 100%;
+    max-height: 80vh;
+    max-width: 100vh;
 }
 
 #note-preview-card .card-body {
