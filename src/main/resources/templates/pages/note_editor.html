@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +9,7 @@
     <link rel="stylesheet" href="../static/css/base.css" th:href="@{css/base.css}">
     <title>NotePLS</title>
 </head>
-
 <body>
-    
 
     <div class="root">
         <div th:replace="fragments/header.html :: nav"></div>
@@ -25,18 +22,21 @@
                         <i data-feather="save"></i>
                         <span th:text="#{save}">Save</span>
                     </button>
-                    <button id="bold-btn" class="btn btn-light">
+                    <div id="bold-btn" class="btn btn-light">
                         <i data-feather="bold"></i>
-                    </button>
-                    <button id="italic-btn" class="btn btn-light">
+                    </div>
+                    <div id="italic-btn" class="btn btn-light">
                         <i data-feather="italic"></i>
-                    </button>
-                    <button id="underline-btn" class="btn btn-light">
+                    </div>
+                    <div id="underline-btn" class="btn btn-light">
                         <i data-feather="underline"></i>
-                    </button>
-                    <button id="strikethrough-btn" class="btn btn-light">
+                    </div>
+                    <div id="strikethrough-btn" class="btn btn-light">
                         <img th:src="@{svg\strikethrough.svg}">
-                    </button>
+                    </div>
+                    <div id="list-btn" class="btn btn-light">
+                        <i data-feather="list"></i>
+                    </div>
                 </div>
                 <div id="preview-toolbar" class="col">
                     <button id="view-preview-btn" class="btn btn-light">
