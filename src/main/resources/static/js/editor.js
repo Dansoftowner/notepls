@@ -6,6 +6,38 @@ const textArea = document.getElementById("raw-note-area");
 const notePreview = document.getElementById("note-preview");
 const doubleSpace = "  ";
 
+function initPreviewButtons() {
+    const textEditorButton = document.getElementById("text-preview-btn");
+    const textAreaCol = document.getElementById("text-area-col");
+
+    const previewButton = document.getElementById("view-preview-btn");
+    const previewCol = document.getElementById("preview-col");
+
+    const initInclusion = function(button1, button2) {
+        button1.addEventListener("click", (event) => {
+            if (!button2.attributes["class"].contains("active")) 
+                event.preventDefault();
+        });
+    }
+
+    initInclusion(previewButton, textEditorButton);
+    initInclusion(textEditorButton, previewButton);
+
+    const initToggling = function(button, element) {
+        const toggles = {
+            "none" : "block",
+            "block" : "none",
+            "" : "none",
+        };
+        button.addEventListener("click", () => {
+            element.style.display = toggles[element.style.display];
+        });
+    }
+
+    initToggling(textEditorButton, textAreaCol);
+    initToggling(previewButton, previewCol);
+}
+
 /**
  * Updates the content of the note-preview area according to the content of the text-area
  */
@@ -94,6 +126,7 @@ function initEditorButtons() {
  * Configures everything needed on a newly loaded page
  */
 function init() {
+    initPreviewButtons();
     initPreviewUpdate();
     initEditorButtons();
     updateNotePreview();    
