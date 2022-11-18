@@ -96,7 +96,8 @@ function initEditorButtons() {
         "italic-btn" : "_",
         "underline-btn" : ["<u>", "</u>"],
         "strikethrough-btn" : "~",
-        "list-btn" : ["* ", ""]
+        "list-btn" : ["* ", ""],
+        "link-btn" : ["[", "]()"]
     };
     
     for (const id in btns) {
