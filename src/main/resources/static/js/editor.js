@@ -26,10 +26,21 @@ function initPreviewButtons() {
             } 
             element.style.display = toggles[element.style.display];
         });
-    }
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth <= 768) {
+                if (button.className.includes("active") && otherButton.className.includes("active")) {
+                    button.className.replace("active", "");
+                    element.style.display = "none";
+                }
+            }
+        })
+    };
 
     initToggling(textEditorButton, previewButton, textAreaCol);
     initToggling(previewButton, textEditorButton, previewCol);
+
+    
 }
 
 /**
