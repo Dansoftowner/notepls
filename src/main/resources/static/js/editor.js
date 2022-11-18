@@ -13,29 +13,23 @@ function initPreviewButtons() {
     const previewButton = document.getElementById("view-preview-btn");
     const previewCol = document.getElementById("preview-col");
 
-    const initInclusion = function(button1, button2) {
-        button1.addEventListener("click", (event) => {
-            if (!button2.attributes["class"].contains("active")) 
-                event.preventDefault();
-        });
-    }
-
-    initInclusion(previewButton, textEditorButton);
-    initInclusion(textEditorButton, previewButton);
-
-    const initToggling = function(button, element) {
+    const initToggling = function(button, otherButton, element) {
         const toggles = {
             "none" : "block",
             "block" : "none",
             "" : "none",
         };
         button.addEventListener("click", () => {
+            if (!(button.className.includes("active") || otherButton.className.includes("active"))) {
+                button.className += " active";
+                return;
+            } 
             element.style.display = toggles[element.style.display];
         });
     }
 
-    initToggling(textEditorButton, textAreaCol);
-    initToggling(previewButton, previewCol);
+    initToggling(textEditorButton, previewButton, textAreaCol);
+    initToggling(previewButton, textEditorButton, previewCol);
 }
 
 /**
