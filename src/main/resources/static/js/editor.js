@@ -2,9 +2,11 @@
   Copyright (c) 2022 Daniel Gyoerffy.
 */
 
+const MEDIUM_SIZE = 768;
+const DOUBLE_SPACE = "  ";
+
 const textArea = document.getElementById("raw-note-area");
 const notePreview = document.getElementById("note-preview");
-const doubleSpace = "  ";
 
 function initPreviewButtons() {
     const textEditorButton = document.getElementById("text-preview-btn");
@@ -13,34 +15,39 @@ function initPreviewButtons() {
     const previewButton = document.getElementById("view-preview-btn");
     const previewCol = document.getElementById("preview-col");
 
-    const initToggling = function(button, otherButton, element) {
+    const initToggling = function (button, otherButton, element) {
         const toggles = {
-            "none" : "block",
-            "block" : "none",
-            "" : "none",
+            "none": "block",
+            "block": "none",
+            "": "none",
         };
         button.addEventListener("click", () => {
-            if (!(button.className.includes("active") || otherButton.className.includes("active"))) {
+            if (!(isPressed(button) || isPressed(otherButton))) {
                 button.className += " active";
                 return;
-            } 
+            }
             element.style.display = toggles[element.style.display];
         });
-
-        window.addEventListener("resize", () => {
-            if (window.innerWidth <= 768) {
-                if (button.className.includes("active") && otherButton.className.includes("active")) {
-                    button.className.replace("active", "");
-                    element.style.display = "none";
-                }
-            }
-        })
     };
+
+    // window.addEventListener("resize", () => {
+    //     if (window.innerWidth <= MEDIUM_SIZE) {
+    //         if (isPressed(previewButton) && isPressed(textEditorButton)) {
+    //             previewButton.className.replace("active", "");
+    //             previewCol.style.display = "none";
+    //             return;
+    //         }
+    //     }
+    //     previewButton.className += " active";
+    //     previewCol.style.display = "block";
+    // });
 
     initToggling(textEditorButton, previewButton, textAreaCol);
     initToggling(previewButton, textEditorButton, previewCol);
+}
 
-    
+function isPressed(toggleButton) {
+    return toggleButton.className.includes("active");
 }
 
 /**
@@ -60,13 +67,13 @@ function updateNotePreview() {
 function wrapSelectedTextWithAbbreviation(left, right = left) {
     const s = textArea.selectionStart;
     const e = textArea.selectionEnd;
-    
+
     const selected = textArea.value.substring(s, e);
-    
+
     let wrapStringChunck = (it) => {
         it = it.trim();
         // avoid redundant abbrevations
-        if (it.startsWith(left) && it.endsWith(right)) 
+        if (it.startsWith(left) && it.endsWith(right))
             return it;
         return `${left}${it}${right}`;
     };
@@ -74,11 +81,11 @@ function wrapSelectedTextWithAbbreviation(left, right = left) {
     // only wrap elements that are separated by markdown line-breaks in a larger chunk 
     let replacement = selected.split(/\s{2}\n/)
         .map(wrapStringChunck)
-        .join(`${doubleSpace}\n`);
+        .join(`${DOUBLE_SPACE}\n`);
 
     // avoid losing the original line-break appended on the end of the selected text
-    if (selected.endsWith(doubleSpace)) {
-        replacement += doubleSpace;
+    if (selected.endsWith(DOUBLE_SPACE)) {
+        replacement += DOUBLE_SPACE;
     }
 
     textArea.setRangeText(replacement, s, e);
@@ -103,20 +110,20 @@ function initPreviewUpdate() {
  */
 function initEditorButtons() {
     let btns = {
-        "bold-btn" : "**",
-        "italic-btn" : "_",
-        "underline-btn" : ["<u>", "</u>"],
-        "strikethrough-btn" : "~",
-        "list-btn" : ["* ", ""],
-        "link-btn" : ["[", "]()"]
+        "bold-btn": "**",
+        "italic-btn": "_",
+        "underline-btn": ["<u>", "</u>"],
+        "strikethrough-btn": "~",
+        "list-btn": ["* ", ""],
+        "link-btn": ["[", "]()"]
     };
-    
+
     for (const id in btns) {
         let left;
         let right;
 
         left = right = btns[id];
-        
+
         if (Array.isArray(btns[id])) {
             left = btns[id][0];
             right = btns[id][1];
@@ -135,7 +142,7 @@ function init() {
     initPreviewButtons();
     initPreviewUpdate();
     initEditorButtons();
-    updateNotePreview();    
+    updateNotePreview();
 }
 
 init();
