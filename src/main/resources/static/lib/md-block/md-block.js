@@ -19,6 +19,9 @@
  
          text = text.replace(RegExp("^" + indent, "gm"), "");
      }
+
+     // Added by Dansoftowner (to support blockquotes) see: https://github.com/markedjs/marked/issues/874 
+     text = text.replace(/&gt;+/g, '>');
  
      return text;
  }
