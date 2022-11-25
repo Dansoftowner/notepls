@@ -125,7 +125,6 @@ function initEditorButtons() {
     let btns = {
         "bold-btn": "**",
         "italic-btn": "_",
-        "underline-btn": ["<u>", "</u>"],
         "strikethrough-btn": "~",
         "list-btn": ["* ", ""],
         "link-btn": ["[", "]()"]
