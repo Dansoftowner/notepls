@@ -8,46 +8,59 @@ const DOUBLE_SPACE = "  ";
 const textArea = document.getElementById("raw-note-area");
 const notePreview = document.getElementById("note-preview");
 
+const editToolbar = document.getElementById("edit-toolbar");
+
+/* Preview toolbar related */
+
+const textEditorButton = document.getElementById("text-preview-btn");
+const textAreaCol = document.getElementById("text-area-col");
+
+const previewButton = document.getElementById("view-preview-btn");
+const previewCol = document.getElementById("preview-col");
+
+const previewBothButton = document.getElementById("both-preview-btn");
+
+/**
+ * Initializes the behaviour of the preview handling buttons.
+ */
 function initPreviewButtons() {
-    const textEditorButton = document.getElementById("text-preview-btn");
-    const textAreaCol = document.getElementById("text-area-col");
-
-    const previewButton = document.getElementById("view-preview-btn");
-    const previewCol = document.getElementById("preview-col");
-
-    const initToggling = function (button, otherButton, element) {
-        const toggles = {
-            "none": "block",
-            "block": "none",
-            "": "none",
-        };
+    const initToggling = function (button, otherButtons, elements, otherElements) {
         button.addEventListener("click", () => {
-            if (!(isPressed(button) || isPressed(otherButton))) {
+            if (!areTherePressed(otherButtons)) {
+                // don't let this button to be deselected if it's the selected option
                 button.className += " active";
                 return;
             }
-            element.style.display = toggles[element.style.display];
+            otherButtons.forEach(it => { it.className = it.className.replace("active", ""); });
+            otherElements.forEach(it => { it.style.display = "none"; });
+            elements.forEach(it => { it.style.display = "block"; });
         });
     };
 
-    // window.addEventListener("resize", () => {
-    //     if (window.innerWidth <= MEDIUM_SIZE) {
-    //         if (isPressed(previewButton) && isPressed(textEditorButton)) {
-    //             previewButton.className.replace("active", "");
-    //             previewCol.style.display = "none";
-    //             return;
-    //         }
-    //     }
-    //     previewButton.className += " active";
-    //     previewCol.style.display = "block";
-    // });
+    initToggling(textEditorButton, [previewButton, previewBothButton], [textAreaCol, editToolbar], [previewCol]);
+    initToggling(previewButton, [textEditorButton, previewBothButton], [previewCol], [textAreaCol, editToolbar]);
+    initToggling(previewBothButton, [textEditorButton, previewButton], [textAreaCol, previewCol, editToolbar], []);
 
-    initToggling(textEditorButton, previewButton, textAreaCol);
-    initToggling(previewButton, textEditorButton, previewCol);
+    window.addEventListener("resize", () => {
+        // Don't allow both panels to be visible if the window's width is below medium
+        if (window.innerWidth <= MEDIUM_SIZE && isPressed(previewBothButton))
+            textEditorButton.dispatchEvent(new Event("click"));
+    });
 }
 
+/**
+ * Evaluates whether the given toggle-button is selected or not.
+ */
 function isPressed(toggleButton) {
     return toggleButton.className.includes("active");
+}
+
+/**
+ * Evaluates whether the collection of toggle-buttons contains at 
+ * least one selected element. 
+ */
+function areTherePressed(toggleButtons) {
+    return toggleButtons.filter(it => isPressed(it)).length > 0;
 }
 
 /**

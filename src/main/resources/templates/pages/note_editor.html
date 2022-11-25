@@ -17,36 +17,41 @@
         <form id="note-form" class="h-100" method="post" action="">
             <!-- Toolbar -->
             <div class="row px-4 mt-2">
-                <div class="col">
-                    <button type="submit" class="btn btn-primary d-none d-md-inline">
+                <div class="col-auto pe-0 d-none d-md-inline">
+                    <button type="submit" class="btn btn-primary">
                         <i data-feather="save"></i>
                         <span th:text="#{save}">Save</span>
                     </button>
-                    <div id="bold-btn" class="btn btn-light">
+                </div>
+                <div id="edit-toolbar" class="col">
+                    <div id="bold-btn" class="btn btn-light toolbar-btn">
                         <i data-feather="bold"></i>
                     </div>
-                    <div id="italic-btn" class="btn btn-light">
+                    <div id="italic-btn" class="btn btn-light toolbar-btn">
                         <i data-feather="italic"></i>
                     </div>
-                    <div id="underline-btn" class="btn btn-light">
+                    <div id="underline-btn" class="btn btn-light toolbar-btn">
                         <i data-feather="underline"></i>
                     </div>
-                    <div id="strikethrough-btn" class="btn btn-light">
+                    <div id="strikethrough-btn" class="btn btn-light toolbar-btn">
                         <img th:src="@{svg\strikethrough.svg}">
                     </div>
-                    <div id="list-btn" class="btn btn-light">
+                    <div id="list-btn" class="btn btn-light toolbar-btn">
                         <i data-feather="list"></i>
                     </div>
-                    <div id="link-btn" class="btn btn-light">
+                    <div id="link-btn" class="btn btn-light toolbar-btn">
                         <i data-feather="link-2"></i>
                     </div>
                 </div>
                 <div id="preview-toolbar" class="col">
-                    <button id="text-preview-btn" class="btn btn-light active" data-bs-toggle="button" aria-pressed="true">
+                    <button id="text-preview-btn" class="btn btn-light toolbar-btn" data-bs-toggle="button" aria-pressed="true">
                         <i data-feather="edit"></i>
                     </button>
-                    <button id="view-preview-btn" class="btn btn-light active" data-bs-toggle="button" aria-pressed="true">
+                    <button id="view-preview-btn" class="btn btn-light toolbar-btn" data-bs-toggle="button" aria-pressed="true">
                         <i data-feather="image"></i>
+                    </button>
+                    <button id="both-preview-btn" class="btn btn-light toolbar-btn active" data-bs-toggle="button" aria-pressed="true">
+                        <i data-feather="columns"></i>
                     </button>
                 </div>
             </div>
