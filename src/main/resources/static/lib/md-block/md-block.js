@@ -7,10 +7,8 @@
  let DOMPurify = window.DOMPurify;
  let Prism = window.Prism;
  
- export const URLs = {
-     marked: "https://cdn.jsdelivr.net/npm/marked/src/marked.min.js",
-     DOMPurify: "https://cdn.jsdelivr.net/npm/dompurify@2.3.3/dist/purify.es.min.js"
- }
+ // Modified by @Dansoftowner: no need for urls, since we import these libs from local scope 
+ export const URLs = {} 
  
  // Fix indentation
  function deIndent(text) {
@@ -72,10 +70,6 @@
              return;
          }
  
-         if (!marked) {
-             marked = import(URLs.marked).then(m => m.marked);
-         }
- 
          marked = await marked;
  
          marked.setOptions({
@@ -129,10 +123,6 @@
      }
  
      static async sanitize(html) {
-         if (!DOMPurify) {
-             DOMPurify = import(URLs.DOMPurify).then(m => m.default);
-         }
- 
          DOMPurify = await DOMPurify; // in case it's still loading
  
          return DOMPurify.sanitize(html);
