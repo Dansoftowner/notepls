@@ -84,10 +84,26 @@ body {
     overflow-x: hidden;
 }
 
-blockquote {
+/* Markdown rendering related */
+
+md-block blockquote {
     border-left: #0d6efd solid 4px;
     padding-left: 5px;
     background-color: rgba(0, 0, 0, 0.068);
+}
+
+md-block code, md-block pre {
+    font-family: inherit;
+    background-color: rgba(0, 0, 0, 0.068);
+    border-radius: 3px;
+}
+
+md-block pre {
+    padding: 5px;
+}
+
+md-block pre code {
+    background-color: transparent;
 }
 
 @media (max-width: 768px) {
