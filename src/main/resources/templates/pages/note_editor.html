@@ -22,8 +22,11 @@
                         <i data-feather="save"></i>
                         <span th:text="#{save}">Save</span>
                     </button>
+                    <div class="btn btn-info" style="width: fit-content;">
+                        <i data-feather="more-vertical"></i>
+                    </div>
                 </div>
-                <div id="edit-toolbar" class="col">
+                <div id="edit-toolbar" class="col-8 col-md">
                     <div id="bold-btn" class="btn btn-light toolbar-btn">
                         <i data-feather="bold"></i>
                     </div>
@@ -40,7 +43,7 @@
                         <i data-feather="link-2"></i>
                     </div>
                 </div>
-                <div id="preview-toolbar" class="col">
+                <div id="preview-toolbar" class="col-4 col-md">
                     <button id="text-preview-btn" class="btn btn-light toolbar-btn" data-bs-toggle="button" aria-pressed="true">
                         <i data-feather="edit"></i>
                     </button>
@@ -54,7 +57,7 @@
             </div>
 
             <!-- Editor and preview -->
-            <div class="row h-100 preview-row px-4 mt-2">
+            <div class="row h-100 px-4 mt-2 preview-row">
                 <div class="col-12 col-md" id="text-area-col">
                     <div class="form-group h-100">
                         <textarea class="form-control h-100" id="raw-note-area"></textarea>
@@ -74,8 +77,28 @@
                 </div>
             </div>
 
-            <div class="fixed-bottom p-3 d-md-none">
-                <button type="submit" class="btn btn-primary float-end rounded-circle pt-1 px-3" style="font-size: 2em;" th:title="#{save}"><i data-feather="save"></i></button>
+            <div class="col w-100 px-4 mt-2 hover-overlay preferences-col">
+                <input type="text">
+                <input type="text">
+            </div>
+
+            <div class="fixed-bottom p-3 pe-4 d-md-none ms-auto" style="width: fit-content;">
+                <div class="row">
+                    <div class="btn btn-info rounded-circle pt-1 px-3 preferences-invoker" 
+                        style="font-size: 2em; width: fit-content;" 
+                        action="">
+                            <i data-feather="more-vertical"></i>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <button type="submit" 
+                        class="btn btn-primary rounded-circle pt-1 px-3" 
+                        style="font-size: 2em; width: fit-content;" 
+                        th:title="#{save}">
+                            <i data-feather="save"></i>
+                    </button>
+                </div>
+                
             </div>
         </form>
     </div>

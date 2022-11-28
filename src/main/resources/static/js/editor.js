@@ -20,6 +20,19 @@ const previewCol = document.getElementById("preview-col");
 
 const previewBothButton = document.getElementById("both-preview-btn");
 
+function initPreferencesButtons() {
+    // TODO
+    const previewRow = document.getElementById("preview-row");
+    const preferencesCol = document.getElementById("preferences-col");
+
+    const preferencesButtons = document.getElementsByClassName("preferences-invoker");
+    preferencesButtons.forEach(it => {
+        it.addEventListener("click", () => {
+
+        });
+    });
+}
+
 /**
  * Initializes the behaviour of the preview handling buttons.
  */
