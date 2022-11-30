@@ -24,13 +24,16 @@ function initPreferencesButtons() {
     // TODO
     const previewRow = document.getElementById("preview-row");
     const preferencesCol = document.getElementById("preferences-col");
+    preferencesCol.style.display = "none";
 
     const preferencesButtons = document.getElementsByClassName("preferences-invoker");
-    preferencesButtons.forEach(it => {
+    const toggles = { "none" : "block", "block" : "none", "" : "none" };
+    for (it of preferencesButtons) {
         it.addEventListener("click", () => {
-
+            previewRow.style.display = toggles[previewRow.style.display];
+            preferencesCol.style.display = toggles[preferencesCol.style.display];
         });
-    });
+    }
 }
 
 /**
@@ -164,6 +167,7 @@ function initEditorButtons() {
  * Configures everything needed on a newly loaded page
  */
 function init() {
+    initPreferencesButtons();
     initPreviewButtons();
     initPreviewUpdate();
     initEditorButtons();
