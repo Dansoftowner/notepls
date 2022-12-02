@@ -23,7 +23,8 @@
                         <span th:text="#{save}">Save</span>
                     </button>
                     <div class="btn btn-info preferences-invoker" style="width: fit-content;">
-                        <i data-feather="more-vertical"></i>
+                        <i class="eye-icon" data-feather="eye"></i>
+                        <i class="eye-off-icon" style="display: none;" data-feather="eye-off"></i>
                     </div>
                 </div>
                 <div id="edit-toolbar" class="col-8 col-md">
@@ -60,14 +61,16 @@
             <div id="preview-row" class="row h-100 px-4 mt-2">
                 <div class="col-12 col-md" id="text-area-col">
                     <div class="form-group h-100">
-                        <textarea class="form-control h-100" id="raw-note-area"></textarea>
+                        <input id="title-field" type="text" class="extra-field w-100 mb-2">
+                        <textarea class="form-control" id="raw-note-area"></textarea>
+                        <input id="tag-field" type="text" class="extra-field w-100 mt-2">
                     </div>
                 </div>
                 <div class="col-12 col-md" id="preview-col">
                     <div class="card" id="note-preview-card">
-                        <div class="card-header"></div>
+                        <div class="card-header py-1 px-2" id="card-header"></div>
                         <div class="card-body">
-                            <h5 class="card-title"></h5>
+                            <h5 class="card-title" id="card-title"></h5>
                             <p class="card-text">
                                 <div id="note-preview" class="h-100">
                                 </div>
@@ -77,17 +80,13 @@
                 </div>
             </div>
 
-            <div id="preferences-col" class="col w-100 px-4 mt-2 hover-overlay">
-                <input type="text">
-                <input type="text">
-            </div>
-
             <div class="fixed-bottom p-3 pe-4 d-md-none ms-auto" style="width: fit-content;">
                 <div class="row">
-                    <div class="btn btn-info rounded-circle pt-1 px-3 preferences-invoker" 
+                    <div class="btn btn-info rounded-circle py-1 px-3 preferences-invoker" 
                         style="font-size: 2em; width: fit-content;" 
                         action="">
-                            <i data-feather="more-vertical"></i>
+                            <i class="eye-icon" data-feather="eye"></i>
+                            <i class="eye-off-icon" style="display: none;" data-feather="eye-off"></i>
                     </div>
                 </div>
                 <div class="row mt-2">

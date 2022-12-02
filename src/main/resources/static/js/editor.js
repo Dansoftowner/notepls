@@ -6,7 +6,12 @@ const MEDIUM_SIZE = 768;
 const DOUBLE_SPACE = "  ";
 
 const textArea = document.getElementById("raw-note-area");
+const titleField = document.getElementById("title-field");
+const tagField = document.getElementById("tag-field");
+
 const notePreview = document.getElementById("note-preview");
+const noteTitleLabel = document.getElementById("card-title");
+const noteCategoryHeader = document.getElementById("card-header");
 
 const editToolbar = document.getElementById("edit-toolbar");
 
@@ -21,17 +26,23 @@ const previewCol = document.getElementById("preview-col");
 const previewBothButton = document.getElementById("both-preview-btn");
 
 function initPreferencesButtons() {
-    // TODO
-    const previewRow = document.getElementById("preview-row");
-    const preferencesCol = document.getElementById("preferences-col");
-    preferencesCol.style.display = "none";
+    const extraElements = document.getElementsByClassName("extra-field");
+    const eyeIcons = Array.from(document.getElementsByClassName("eye-icon"));
+    const eyeOffIcons = Array.from(document.getElementsByClassName("eye-off-icon"));
 
     const preferencesButtons = document.getElementsByClassName("preferences-invoker");
-    const toggles = { "none" : "block", "block" : "none", "" : "none" };
+    const toggles = { 
+        "none" : "block", 
+        "block" : "none", 
+        "" : "none" 
+    };
     for (it of preferencesButtons) {
         it.addEventListener("click", () => {
-            previewRow.style.display = toggles[previewRow.style.display];
-            preferencesCol.style.display = toggles[preferencesCol.style.display];
+            for (item of extraElements) {
+                item.style.display = toggles[item.style.display];
+            }
+            eyeIcons.forEach(it => {it.style.display = toggles[it.style.display]; })
+            eyeOffIcons.forEach(it => {it.style.display = toggles[it.style.display]; })
         });
     }
 }
@@ -84,6 +95,10 @@ function areTherePressed(toggleButtons) {
  */
 function updateNotePreview() {
     notePreview.innerHTML = `<md-block>${textArea.value}</md-block>`;
+    noteTitleLabel.innerHTML = titleField.value;
+    noteCategoryHeader.innerHTML = tagField.value.split(/\s/)
+                                                 .map(it => `<span class="tag-span">${it}</span>`)
+                                                 .join(" ");
 }
 
 /**
@@ -128,10 +143,12 @@ function wrapSelectedTextWithAbbreviation(left, right = left) {
  * Configures the text-area to update the preview when it's content changes
  */
 function initPreviewUpdate() {
-    textArea.addEventListener("onchange", updateNotePreview);
-    textArea.addEventListener("keypress", updateNotePreview);
-    textArea.addEventListener("keydown", updateNotePreview);
-    textArea.addEventListener("keyup", updateNotePreview);
+    for (const field of [textArea, titleField, tagField]) {
+        field.addEventListener("onchange", updateNotePreview);
+        field.addEventListener("keypress", updateNotePreview);
+        field.addEventListener("keydown", updateNotePreview);
+        field.addEventListener("keyup", updateNotePreview);
+    }
 }
 
 /**

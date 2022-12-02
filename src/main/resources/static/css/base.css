@@ -67,6 +67,7 @@ body {
 
 #raw-note-area {
     resize: none;
+    height: 90%;
 }
 
 .preview-row col {
@@ -82,6 +83,18 @@ body {
 #note-preview-card .card-body {
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.tag-span {
+    font-size: 0.9em;
+    font-family: inherit;
+    background-color: rgba(0, 0, 0, 0.068);
+    border-radius: 3px;
+    margin-right: 2px;
+}
+
+.tag-span::before {
+    content: "#";
 }
 
 /* Markdown rendering related */
