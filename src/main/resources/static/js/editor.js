@@ -90,15 +90,27 @@ function areTherePressed(toggleButtons) {
     return toggleButtons.filter(it => isPressed(it)).length > 0;
 }
 
+function updateMarkdownRendering() {
+    notePreview.innerHTML = `<md-block>${textArea.value}</md-block>`;
+}
+
+function updateNoteTitle() {
+    noteTitleLabel.innerHTML = titleField.value;
+}
+
+function updateNoteCategory() {
+    noteCategoryHeader.innerHTML = Array.from(new Set(tagField.value.split(/\s/)))
+        .map(it => it.length != 0 ?  `<span class="tag-span">${it}</span>` : "")
+        .join(" ");
+}
+
 /**
  * Updates the content of the note-preview area according to the content of the text-area
  */
 function updateNotePreview() {
-    notePreview.innerHTML = `<md-block>${textArea.value}</md-block>`;
-    noteTitleLabel.innerHTML = titleField.value;
-    noteCategoryHeader.innerHTML = tagField.value.split(/\s/)
-                                                 .map(it => `<span class="tag-span">${it}</span>`)
-                                                 .join(" ");
+    updateNoteTitle();
+    updateNoteCategory();
+    updateMarkdownRendering();
 }
 
 /**
