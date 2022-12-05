@@ -25,6 +25,10 @@ const previewCol = document.getElementById("preview-col");
 
 const previewBothButton = document.getElementById("both-preview-btn");
 
+function joinCollections(elements) {
+    return elements.flatMap(it => it);
+}
+
 function initPreferencesButtons() {
     const extraElements = document.getElementsByClassName("extra-field");
     const eyeIcons = Array.from(document.getElementsByClassName("eye-icon"));
@@ -67,6 +71,28 @@ function initPreviewButtons() {
     initToggling(textEditorButton, [previewButton, previewBothButton], [textAreaCol, editToolbar], [previewCol]);
     initToggling(previewButton, [textEditorButton, previewBothButton], [previewCol], [textAreaCol, editToolbar]);
     initToggling(previewBothButton, [textEditorButton, previewButton], [textAreaCol, previewCol, editToolbar], []);
+
+    /**
+     *  initToggling(
+        textEditorButton, 
+        joinCollections([previewButton, previewBothButton], document.getElementsByClassName("preferences-invoker")), 
+        [textAreaCol, editToolbar], 
+        [previewCol]
+    );
+    initToggling(
+        previewButton, 
+        [textEditorButton, previewBothButton],
+        [previewCol], 
+        joinCollections([textAreaCol, editToolbar], document.getElementsByClassName("preferences-invoker"))
+    );
+    initToggling(
+        previewBothButton, 
+        [textEditorButton, previewButton], 
+        ([textAreaCol, previewCol, editToolbar], document.getElementsByClassName("preferences-invoker")), 
+        []    
+    );
+
+     */
 
     window.addEventListener("resize", () => {
         // Don't allow both panels to be visible if the window's width is below medium
