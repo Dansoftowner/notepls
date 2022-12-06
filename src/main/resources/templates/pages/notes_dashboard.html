@@ -29,7 +29,7 @@
                                 <md-block hmin="3" th:text="${note.content}"></md-block>
                             </div>
                         </p>
-                        <a href="" class="btn btn-primary" th:text="#{note.full}">See full note</a>
+                        <a th:href="'edit/' + ${note.id}" class="btn btn-primary" th:text="#{note.full}">See full note</a>
                     </div>
                     <div class="card-footer text-muted" th:text="${#temporals.format(note.date, 'dd-MM-yyyy HH:mm')}" th:if="${note.date} != null">
                         2 days ago

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta th:replace="fragments/stylesheets.html">
+    <meta th:replace="/fragments/stylesheets.html">
     <title>NotePLS</title>
 </head>
 <body>
@@ -34,7 +34,7 @@
                             <i data-feather="italic"></i>
                         </div>
                         <div id="strikethrough-btn" class="btn btn-light toolbar-btn">
-                            <img th:src="@{svg\strikethrough.svg}">
+                            <img th:src="@{/svg/strikethrough.svg}">
                         </div>
                         <div id="list-btn" class="btn btn-light toolbar-btn">
                             <i data-feather="list"></i>
@@ -61,9 +61,9 @@
             <div id="preview-row" class="row h-100 px-4 mt-2">
                 <div class="col-12 col-md" id="text-area-col">
                     <div class="form-group h-100">
-                        <input id="title-field" type="text" class="extra-field w-100 mb-2">
-                        <textarea class="form-control" id="raw-note-area"></textarea>
-                        <input id="tag-field" type="text" class="extra-field w-100 mt-2">
+                        <input name="title" id="title-field" type="text" class="extra-field w-100 mb-2" th:value="${note} != null ? ${note.title} : ''">
+                        <textarea name="content" class="form-control" id="raw-note-area" th:text="${note} != null ? ${note.content} : ''"></textarea>
+                        <input name="tags" id="tag-field" type="text" class="extra-field w-100 mt-2" th:value="${note} != null ? ${#strings.listJoin(note.tags, ' ')} : ''">
                     </div>
                 </div>
                 <div class="col-12 col-md" id="preview-col">
@@ -102,8 +102,8 @@
         </form>
     </div>
       
-    <div th:replace="fragments/jslibs.html"></div>
-    <script th:src="@{js/editor.js}"></script>
+    <div th:replace="/fragments/jslibs.html"></div>
+    <script th:src="@{/js/editor.js}"></script>
 </body>
 
 </html>
