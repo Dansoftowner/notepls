@@ -18,8 +18,9 @@
 
             <div class="col-auto" th:each="note : ${notes}">
                 <div class="card" style="width: 16em">
-                    <div class="card-header" th:text="${note.category}" th:if="${note.category} != null">
-                        Personal category
+                    <div class="card-header" th:if="${note.tags} != null">
+                        <span class="tag-span" th:each="tag : ${note.tags}" th:text="${tag.toString()}">
+                        </span>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${note.title}">My scriptures</h5>

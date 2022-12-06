@@ -17,7 +17,7 @@ class DashboardService {
                        * Yes note
                        * No note
                     """.trimIndent(),
-                        category = "Nonsense",
+                        tags = listOf("Nonsense", "Craziness"),
                         date = LocalDateTime.of(LocalDate.of(2004, 11, 1), LocalTime.of(10, 10))
                 ),
                 Note(
@@ -26,7 +26,7 @@ class DashboardService {
                        ### What is this man
                        > Seems nice btw
                        """.trimIndent(),
-                        category = null,
+                        tags = listOf("Simple", "Test", "Something"),
                         date = LocalDateTime.now()
                 ),
                 Note(
@@ -38,7 +38,7 @@ class DashboardService {
                        
                        ${(1..100).joinToString("\n")}
                        """.trimIndent(),
-                        category = null,
+                        tags = listOf("list", "important"),
                         date = LocalDateTime.of(2005, 5, 23, 12, 0)
                 )
         )

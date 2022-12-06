@@ -6,5 +6,5 @@ class Note(
         val title: String,
         val content: String,
         val date: LocalDateTime,
-        val category: String?
+        val tags: List<String>
 )
