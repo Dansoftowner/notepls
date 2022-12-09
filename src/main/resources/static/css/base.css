@@ -93,15 +93,43 @@ textarea {
     overflow-x: hidden;
 }
 
+.tag-heap {
+    margin: auto;
+    margin-bottom: 10px;
+    width: fit-content;
+}
+
+.tag-span.h {
+    font-size: 1.5em;
+    margin-right: 8px;
+}
+
+.tag-span a {
+    text-align: center;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+}
+
+.tag-span a:hover {
+    color: rgb(104, 104, 219);
+}
+
+.tag-span a::before {
+    content: "#";
+}
+
 .tag-span {
     font-size: 0.9em;
     font-family: inherit;
     border-radius: 3px;
     margin-right: 2px;
+    padding: 0;
 }
 
 .tag-span::before {
-    content: "#";
+    /* content: "#"; */
 }
 
 /* Markdown rendering related */

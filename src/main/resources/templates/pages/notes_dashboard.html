@@ -13,14 +13,19 @@
 
     <div class="container">
         <h3 class="text-center fw-normal my-4 text-muted" th:text="#{your_notes}">Your notes</h3>
-        <span class="tag-span" th:each="tag : ${values.tagsList}" th:text="${tag}"></span>
+        <div class="tag-heap">
+            <span class="tag-span h" th:each="tag : ${values.tagsList}" >
+                 <a th:href="'/all?tags=' + ${tag}" th:text="${tag}"></a>
+            </span>
+        </div>
 
         <div class="row justify-content-center">
 
             <div class="col-auto" th:each="note : ${values.notesList}">
                 <div class="card" style="width: 16em">
                     <div class="card-header" th:if="${note.tags} != null">
-                        <span class="tag-span" th:each="tag : ${note.tags}" th:text="${tag.toString()}">
+                        <span class="tag-span" th:each="tag : ${note.tags}">
+                            <a th:href="'/all?tags=' + ${tag}" th:text="${tag.toString()}"></a>
                         </span>
                     </div>
                     <div class="card-body">
