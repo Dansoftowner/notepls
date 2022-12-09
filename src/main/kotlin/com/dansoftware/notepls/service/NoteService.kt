@@ -46,20 +46,40 @@ class NoteService {
             )
     )
 
-    fun getNotes(): List<Note> {
-        return noteList.toList()
+    /**
+     * Retrieves all notes stored in the database.
+     * > Note: these notes' content is abbreviated to reduce insufficient network traffic.
+     */
+    fun getAllNotes(tags: List<String>? = null): List<Note> {
+        return tags?.let {
+            noteList.filter { it.tags?.containsAll(tags) ?: false }
+        } ?: noteList.toList()
     }
 
+    /**
+     * Retrieves the note with the given ID.
+     */
     fun getNoteById(id: Int): Note? {
         return noteList.find { it.id == id }
     }
 
+    /**
+     * Inserts the given note into the database.
+     *
+     * After insertion the given [newNote] object's id will be set accordingly.
+     */
     fun insertNote(newNote: Note) {
         val newId = noteList.maxOf { it.id } + 1
         newNote.id = newId
         noteList.add(newNote)
     }
 
+    /**
+     * Updates the given note.
+     * It won't work if the given note object doesn't have an id.
+     *
+     * The given [note] object's attributes will be changed accordingly.
+     */
     fun updateNote(note: Note) {
         noteList.find { it.id == note.id }?.let {
             it.title = note.title
