@@ -13,32 +13,36 @@
 
     <div class="container">
         <h3 class="text-center fw-normal my-4 text-muted" th:text="#{your_notes}">Your notes</h3>
-        <div class="tag-heap">
-            <span class="tag-span h" th:each="tag : ${values.tagsList}" >
-                 <a th:href="'/all?tags=' + ${tag}" th:text="${tag}"></a>
-            </span>
-        </div>
 
-        <div class="row justify-content-center">
+        <div th:each="entry : ${values}">
 
-            <div class="col-auto" th:each="note : ${values.notesList}">
-                <div class="card" style="width: 16em">
-                    <div class="card-header" th:if="${note.tags} != null">
-                        <span class="tag-span" th:each="tag : ${note.tags}">
-                            <a th:href="'/all?tags=' + ${tag}" th:text="${tag.toString()}"></a>
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${note.title}">My scriptures</h5>
-                        <p class="card-text">
-                            <div class="md-area">
-                                <md-block hmin="3" th:text="${note.content}"></md-block>
-                            </div>
-                        </p>
-                        <a th:href="'edit/' + ${note.id}" class="btn btn-primary" th:text="#{note.full}">See full note</a>
-                    </div>
-                    <div class="card-footer text-muted" th:text="${#temporals.format(note.date, 'dd-MM-yyyy HH:mm')}" th:if="${note.date} != null">
-                        2 days ago
+            <div class="tag-heap" th:if="${entry.key}">
+                <span class="tag-span h" th:each="tag : ${entry.key}" >
+                     <a th:href="'/all/tags?custom=' + ${tag}" th:text="${tag}"></a>
+                </span>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <div class="col-auto" th:each="note : ${entry.value}">
+                    <div class="card" style="width: 16em">
+                        <div class="card-header" th:if="${note.tags} != null">
+                            <span class="tag-span" th:each="tag : ${note.tags}">
+                                <a th:href="'/all/tags?custom=' + ${tag}" th:text="${tag.toString()}"></a>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${note.title}">My scriptures</h5>
+                            <p class="card-text">
+                                <div class="md-area">
+                                    <md-block hmin="3" th:text="${note.content}"></md-block>
+                                </div>
+                            </p>
+                            <a th:href="'edit/' + ${note.id}" class="btn btn-primary" th:text="#{note.full}">See full note</a>
+                        </div>
+                        <div class="card-footer text-muted" th:text="${#temporals.format(note.date, 'dd-MM-yyyy HH:mm')}" th:if="${note.date} != null">
+                            2 days ago
+                        </div>
                     </div>
                 </div>
             </div>

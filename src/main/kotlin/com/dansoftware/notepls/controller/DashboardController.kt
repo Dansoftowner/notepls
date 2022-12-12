@@ -1,5 +1,6 @@
 package com.dansoftware.notepls.controller
 
+import com.dansoftware.notepls.domain.Note
 import com.dansoftware.notepls.service.NoteService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -17,12 +18,17 @@ class DashboardController(private val noteService: NoteService) {
     }
 
     @GetMapping("all")
-    fun allNotes(@RequestParam("tags") tags: List<String>?, model: Model): String {
-        model["values"] = object {
-            val tagsList = tags
-            val notesList = noteService.getAllNotes(tags)
-        }
+    fun allNotes(model: Model): String {
+        model["values"] = mapOf(null to noteService.getAllNotes())
         return "pages/notes_dashboard"
     }
 
+    @GetMapping("all/tags")
+    fun allNotesByTags(@RequestParam("custom") customTags: List<String>?, model: Model): String {
+        model["values"] = when(customTags) {
+            null -> noteService.getAllNotesByTags()
+            else -> mapOf(customTags to noteService.getAllNotes(customTags))
+        }
+        return "pages/notes_dashboard"
+    }
 }

@@ -87,4 +87,8 @@ class NoteService {
             it.tags = note.tags
         }
     }
+
+    fun getAllNotesByTags(): Map<List<String>?, List<Note>> {
+        return noteList.groupBy { it.tags }
+    }
 }

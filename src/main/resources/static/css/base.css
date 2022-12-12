@@ -121,15 +121,12 @@ textarea {
 }
 
 .tag-span {
+    display: inline-block;
     font-size: 0.9em;
     font-family: inherit;
     border-radius: 3px;
     margin-right: 2px;
     padding: 0;
-}
-
-.tag-span::before {
-    /* content: "#"; */
 }
 
 /* Markdown rendering related */

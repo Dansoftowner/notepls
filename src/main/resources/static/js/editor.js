@@ -126,7 +126,7 @@ function updateNoteTitle() {
 
 function updateNoteCategory() {
     noteCategoryHeader.innerHTML = Array.from(new Set(tagField.value.split(/\s/)))
-        .map(it => it.length != 0 ?  `<span class="tag-span"><a href="/all?tags=${it}" target="_blank">${it}</a></span>` : "")
+        .map(it => it.length != 0 ?  `<span class="tag-span"><a href="/all/tags?custom=${it}" target="_blank">${it}</a></span>` : "")
         .join(" ");
 }
 
