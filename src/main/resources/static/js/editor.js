@@ -29,28 +29,6 @@ function joinCollections(elements) {
     return elements.flatMap(it => it);
 }
 
-function initPreferencesButtons() {
-    const extraElements = document.getElementsByClassName("extra-field");
-    const eyeIcons = Array.from(document.getElementsByClassName("eye-icon"));
-    const eyeOffIcons = Array.from(document.getElementsByClassName("eye-off-icon"));
-
-    const preferencesButtons = document.getElementsByClassName("preferences-invoker");
-    const toggles = { 
-        "none" : "block", 
-        "block" : "none", 
-        "" : "none" 
-    };
-    for (it of preferencesButtons) {
-        it.addEventListener("click", () => {
-            for (item of extraElements) {
-                item.style.display = toggles[item.style.display];
-            }
-            eyeIcons.forEach(it => {it.style.display = toggles[it.style.display]; })
-            eyeOffIcons.forEach(it => {it.style.display = toggles[it.style.display]; })
-        });
-    }
-}
-
 /**
  * Initializes the behaviour of the preview handling buttons.
  */
@@ -202,7 +180,6 @@ function initEditorButtons() {
  * Configures everything needed on a newly loaded page
  */
 function init() {
-    initPreferencesButtons();
     initPreviewButtons();
     initPreviewUpdate();
     initEditorButtons();
