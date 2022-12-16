@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.util.Collections.singletonList
 
 @Service
 class NoteService {
@@ -89,6 +90,14 @@ class NoteService {
     }
 
     fun getAllNotesByTags(): Map<List<String>?, List<Note>> {
-        return noteList.groupBy { it.tags }
+        val map = mutableMapOf<List<String>?, MutableList<Note>>()
+        noteList.forEach { note ->
+            note.tags?.forEach {
+                map[singletonList(it)]?.add(note) ?: run {
+                    map[singletonList(it)] = mutableListOf(note)
+                }
+            }
+        }
+        return map.toMap()
     }
 }
