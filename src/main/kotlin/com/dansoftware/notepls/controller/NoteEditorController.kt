@@ -32,7 +32,7 @@ class NoteEditorController(private val service: NoteService) {
                 date = LocalDateTime.now()
         )
         service.insertNote(newNote)
-        return "redirect:edit/${newNote.id}"
+        return "redirect:/edit/${newNote.id}"
     }
 
     @GetMapping("edit/{id}")
@@ -40,15 +40,25 @@ class NoteEditorController(private val service: NoteService) {
         service.getNoteById(id)?.let { model["note"] = it }
         return "pages/note_editor.html"
     }
+
     @PostMapping("edit/{id}")
     fun submitChanges(
             @PathVariable("id") id: Int,
             @RequestParam("title") title: String,
             @RequestParam("content") content: String,
             @RequestParam("tags") tags: List<String>?,
+            @RequestParam("method") method: String?,
             model: Model
     ): String {
-        service.updateNote(Note(id, title, content, LocalDateTime.now(), tags))
-        return getPage(id, model)
+        return when (method) {
+            "DELETE" -> {
+                service.removeNote(id)
+                return "redirect:/all"
+            }
+            else -> {
+                service.updateNote(Note(id, title, content, LocalDateTime.now(), tags))
+                getPage(id, model)
+            }
+        }
     }
 }

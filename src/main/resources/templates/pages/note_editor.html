@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <meta th:replace="/fragments/stylesheets.html">
     <title>NotePLS</title>
 </head>
+
 <body>
 
     <div class="root">
@@ -20,9 +22,13 @@
                         <i data-feather="save"></i>
                         <span th:text="#{save}">Save</span>
                     </button>
+                    <button type="submit" th:title="#{delete}" th:if="${note}" class="btn btn-danger" name="method"
+                        value="DELETE">
+                        <i data-feather="trash-2"></i>
+                    </button>
                 </div>
                 <div class="col-9 col-md">
-                    <div id="edit-toolbar" >
+                    <div id="edit-toolbar">
                         <div id="bold-btn" class="btn btn-light toolbar-btn">
                             <i data-feather="bold"></i>
                         </div>
@@ -41,13 +47,16 @@
                     </div>
                 </div>
                 <div id="preview-toolbar" class="col-3 col-md">
-                    <button id="text-preview-btn" class="btn btn-light toolbar-btn" data-bs-toggle="button" aria-pressed="true">
+                    <button id="text-preview-btn" class="btn btn-light toolbar-btn" data-bs-toggle="button"
+                        aria-pressed="true">
                         <i data-feather="edit"></i>
                     </button>
-                    <button id="view-preview-btn" class="btn btn-light toolbar-btn" data-bs-toggle="button" aria-pressed="true">
+                    <button id="view-preview-btn" class="btn btn-light toolbar-btn" data-bs-toggle="button"
+                        aria-pressed="true">
                         <i data-feather="image"></i>
                     </button>
-                    <button id="both-preview-btn" class="btn btn-light toolbar-btn active" data-bs-toggle="button" aria-pressed="true">
+                    <button id="both-preview-btn" class="btn btn-light toolbar-btn active" data-bs-toggle="button"
+                        aria-pressed="true">
                         <i data-feather="columns"></i>
                     </button>
                 </div>
@@ -57,9 +66,12 @@
             <div id="preview-row" class="row h-100 px-4 mt-2">
                 <div class="col-12 col-md" id="text-area-col">
                     <div class="form-group h-100">
-                        <input name="title" id="title-field" type="text" class="extra-field w-100 mb-2" th:value="${note} != null ? ${note.title} : ''">
-                        <textarea name="content" class="form-control" id="raw-note-area" th:text="${note} != null ? ${note.content} : ''"></textarea>
-                        <input name="tags" id="tag-field" type="text" class="extra-field w-100 mt-2" th:value="${note} != null ? ${#strings.listJoin(note.tags, ', ')} : ''">
+                        <input name="title" id="title-field" type="text" class="extra-field w-100 mb-2"
+                            th:value="${note} != null ? ${note.title} : ''">
+                        <textarea name="content" class="form-control" id="raw-note-area"
+                            th:text="${note} != null ? ${note.content} : ''"></textarea>
+                        <input name="tags" id="tag-field" type="text" class="extra-field w-100 mt-2"
+                            th:value="${note} != null ? ${#strings.listJoin(note.tags, ', ')} : ''">
                     </div>
                 </div>
                 <div class="col-12 col-md" id="preview-col">
@@ -68,8 +80,8 @@
                         <div class="card-body">
                             <h5 class="card-title" id="card-title"></h5>
                             <p class="card-text">
-                                <div id="note-preview" class="h-100">
-                                </div>
+                            <div id="note-preview" class="h-100">
+                            </div>
                             </p>
                         </div>
                     </div>
@@ -78,21 +90,22 @@
 
             <div class="fixed-bottom p-3 pe-4 d-md-none ms-auto" style="width: fit-content;">
                 <div class="row">
-                    
-                </div>
-                <div class="row mt-2">
-                    <button type="submit" 
-                        class="btn btn-primary rounded-circle pt-1 px-3" 
-                        style="font-size: 2em; width: fit-content;" 
-                        th:title="#{save}">
-                            <i data-feather="save"></i>
+                    <button type="submit" name="method" value="DELETE" class="btn btn-danger rounded-circle pt-1 px-3"
+                        style="font-size: 2em; width: fit-content;" th:title="#{delete}" th:if="${note}">
+                        <i data-feather="trash-2"></i>
                     </button>
                 </div>
-                
+                <div class="row mt-2">
+                    <button type="submit" class="btn btn-primary rounded-circle pt-1 px-3"
+                        style="font-size: 2em; width: fit-content;" th:title="#{save}">
+                        <i data-feather="save"></i>
+                    </button>
+                </div>
+
             </div>
         </form>
     </div>
-      
+
     <div th:replace="/fragments/jslibs.html"></div>
     <script th:src="@{/js/editor.js}"></script>
 </body>

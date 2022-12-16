@@ -70,7 +70,7 @@ class NoteService {
      * After insertion the given [newNote] object's id will be set accordingly.
      */
     fun insertNote(newNote: Note) {
-        val newId = noteList.maxOf { it.id } + 1
+        val newId = (if (noteList.isNotEmpty()) noteList.maxOf { it.id } else 0) + 1
         newNote.id = newId
         noteList.add(newNote)
     }
@@ -99,5 +99,16 @@ class NoteService {
             }
         }
         return map.toMap()
+    }
+
+    fun removeNote(id: Int) {
+        val iterator = noteList.iterator()
+        while (iterator.hasNext()) {
+            val note = iterator.next()
+            if (note.id == id) {
+                iterator.remove()
+                break
+            }
+        }
     }
 }
