@@ -72,28 +72,6 @@ function initPreviewButtons() {
     initToggling(previewButton, [textEditorButton, previewBothButton], [previewCol], [textAreaCol, editToolbar]);
     initToggling(previewBothButton, [textEditorButton, previewButton], [textAreaCol, previewCol, editToolbar], []);
 
-    /**
-     *  initToggling(
-        textEditorButton, 
-        joinCollections([previewButton, previewBothButton], document.getElementsByClassName("preferences-invoker")), 
-        [textAreaCol, editToolbar], 
-        [previewCol]
-    );
-    initToggling(
-        previewButton, 
-        [textEditorButton, previewBothButton],
-        [previewCol], 
-        joinCollections([textAreaCol, editToolbar], document.getElementsByClassName("preferences-invoker"))
-    );
-    initToggling(
-        previewBothButton, 
-        [textEditorButton, previewButton], 
-        ([textAreaCol, previewCol, editToolbar], document.getElementsByClassName("preferences-invoker")), 
-        []    
-    );
-
-     */
-
     window.addEventListener("resize", () => {
         // Don't allow both panels to be visible if the window's width is below medium
         if (window.innerWidth <= MEDIUM_SIZE && isPressed(previewBothButton))
@@ -125,8 +103,10 @@ function updateNoteTitle() {
 }
 
 function updateNoteCategory() {
-    noteCategoryHeader.innerHTML = Array.from(new Set(tagField.value.split(/\s/)))
-        .map(it => it.length != 0 ?  `<span class="tag-span"><a href="/all/tags?custom=${it}" target="_blank">${it}</a></span>` : "")
+    const toSpan = (it) => it.length != 0 ?  `<span class="tag-span"><a href="/all/tags?custom=${it}" target="_blank">${it}</a></span>` : "";
+    noteCategoryHeader.innerHTML = Array.from(new Set(tagField.value.split(","))) // Only unique elements
+        .map(it => it.trim())
+        .map(toSpan)
         .join(" ");
 }
 

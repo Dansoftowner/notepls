@@ -22,13 +22,13 @@ class NoteEditorController(private val service: NoteService) {
     fun createNewNote(
             @RequestParam("title") title: String,
             @RequestParam("content") content: String,
-            @RequestParam("tags") tags: String,
+            @RequestParam("tags") tags: List<String>?,
             model: Model
     ): String {
         val newNote = Note(
                 title = title,
                 content = content,
-                tags = tags.takeIf { it.isNotBlank() }?.split(" "),
+                tags = tags,
                 date = LocalDateTime.now()
         )
         service.insertNote(newNote)
@@ -45,10 +45,10 @@ class NoteEditorController(private val service: NoteService) {
             @PathVariable("id") id: Int,
             @RequestParam("title") title: String,
             @RequestParam("content") content: String,
-            @RequestParam("tags") tags: String,
+            @RequestParam("tags") tags: List<String>?,
             model: Model
     ): String {
-        service.updateNote(Note(id, title, content, LocalDateTime.now(), tags.takeIf { it.isNotBlank() }?.split(" ")))
+        service.updateNote(Note(id, title, content, LocalDateTime.now(), tags))
         return getPage(id, model)
     }
 }
