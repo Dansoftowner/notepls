@@ -1,7 +1,6 @@
 @import url("fonts.css");
 
-html,
-body {
+html, body {
     height: 90%;
     margin: 0;
     padding: 0;
@@ -26,15 +25,6 @@ body {
 .root {
     height: 100%;
     overflow-x: clip;
-}
-
-input[type="text"], 
-textarea {
-    transition: outline .1s !important;
-    padding: 10px !important;
-    border-radius: 5px !important;
-    font: inherit !important;
-    width: 100% !important;
 }
 
 /* App icon */
@@ -65,17 +55,37 @@ textarea {
     font-weight: bold;
 }
 
+/* Editor and preview */
+
+#editor-form-div {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], 
+textarea {
+    transition: outline .1s !important;
+    padding: 10px !important;
+    border-radius: 5px !important;
+    font: inherit !important;
+    width: 100% !important;
+}
+
+input[type="text"] {
+    padding: 5px !important;
+}
+
+#raw-note-area {
+    resize: none;
+    flex: 2;
+}
+
 #preview-toolbar {
     text-align: right;
 }
 
 #preview-toolbar button {
     display: inline;
-}
-
-#raw-note-area {
-    resize: none;
-    height: 90%;
 }
 
 .preview-row col {

@@ -16,6 +16,10 @@ textarea:focus {
     background-color: rgb(252, 242, 231);
 }
 
+.card-body {
+    color: rgb(72, 72, 72) !important;
+}
+
 .tag-span {
     background-color: rgba(0, 0, 0, 0.068);
 }
