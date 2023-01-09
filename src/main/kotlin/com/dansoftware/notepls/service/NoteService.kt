@@ -1,6 +1,8 @@
 package com.dansoftware.notepls.service
 
 import com.dansoftware.notepls.domain.Note
+import com.dansoftware.notepls.domain.NoteRepository
+import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -8,11 +10,11 @@ import java.time.LocalTime
 import java.util.Collections.singletonList
 
 @Service
-class NoteService {
+@Configuration
+class NoteService(private val repository: NoteRepository) {
 
     private val noteList = mutableListOf(
             Note(
-                    id = 1,
                     title = "My note",
                     content = """
                        # My freaking note
@@ -23,7 +25,6 @@ class NoteService {
                     date = LocalDateTime.of(LocalDate.of(2004, 11, 1), LocalTime.of(10, 10))
             ),
             Note(
-                    id = 2,
                     title = "My note 2",
                     content = """
                        ### What is this man
@@ -33,7 +34,6 @@ class NoteService {
                     date = LocalDateTime.now()
             ),
             Note(
-                    id = 3,
                     title = "Shopping list",
                     content = """
                        * Toothbrush
@@ -60,8 +60,8 @@ class NoteService {
     /**
      * Retrieves the note with the given ID.
      */
-    fun getNoteById(id: Int): Note? {
-        return noteList.find { it.id == id }
+    fun getNoteById(id: Long): Note? {
+        return repository.findById(id).orElse(null)
     }
 
     /**
@@ -70,7 +70,7 @@ class NoteService {
      * After insertion the given [newNote] object's id will be set accordingly.
      */
     fun insertNote(newNote: Note) {
-        val newId = (if (noteList.isNotEmpty()) noteList.maxOf { it.id } else 0) + 1
+        val newId = (if (noteList.isNotEmpty()) noteList.maxOf { it.id!! } else 0) + 1
         newNote.id = newId
         noteList.add(newNote)
     }
@@ -101,7 +101,7 @@ class NoteService {
         return map.toMap()
     }
 
-    fun removeNote(id: Int) {
+    fun removeNote(id: Long) {
         val iterator = noteList.iterator()
         while (iterator.hasNext()) {
             val note = iterator.next()
@@ -110,5 +110,9 @@ class NoteService {
                 break
             }
         }
+    }
+
+    fun initialRecords() {
+
     }
 }

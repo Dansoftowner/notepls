@@ -1,18 +1,21 @@
 package com.dansoftware.notepls.domain
 
 import java.time.LocalDateTime
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 import kotlin.properties.Delegates
 
+@Entity
 class Note(
-        id: Int? = null,
         var title: String?,
         var content: String?,
         var date: LocalDateTime,
         var tags: List<String>?
 ) {
-    var id by Delegates.notNull<Int>()
 
-    init {
-        id?.let(this::id::set)
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long? = null
 }
