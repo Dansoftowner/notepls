@@ -36,14 +36,14 @@ class NoteEditorController(private val service: NoteService) {
     }
 
     @GetMapping("edit/{id}")
-    fun getPage(@PathVariable("id") id: Int, model: Model): String {
+    fun getPage(@PathVariable("id") id: Long, model: Model): String {
         service.getNoteById(id)?.let { model["note"] = it }
         return "pages/note_editor.html"
     }
 
     @PostMapping("edit/{id}")
     fun submitChanges(
-            @PathVariable("id") id: Int,
+            @PathVariable("id") id: Long,
             @RequestParam("title") title: String,
             @RequestParam("content") content: String,
             @RequestParam("tags") tags: List<String>?,
@@ -56,7 +56,7 @@ class NoteEditorController(private val service: NoteService) {
                 return "redirect:/all"
             }
             else -> {
-                service.updateNote(Note(id, title, content, LocalDateTime.now(), tags))
+                service.updateNote(Note(title, content, LocalDateTime.now(), tags).apply { this.id = id })
                 getPage(id, model)
             }
         }
