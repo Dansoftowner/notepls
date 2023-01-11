@@ -1,7 +1,22 @@
-package com.dansoftware.notepls.controller
+/*
+ * This file is part of Notepls.
+ * Copyright (c) 2023 Daniel Gyoerffy.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
 
-import com.dansoftware.notepls.domain.Note
-import com.dansoftware.notepls.service.NoteService
+package com.dansoftware.notepls.note
+
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -12,13 +27,34 @@ import org.springframework.web.bind.annotation.RequestParam
 import java.time.LocalDateTime
 
 @Controller
-class NoteEditorController(private val service: NoteService) {
-    @GetMapping("new")
+class NoteController(private val service: NoteService) {
+
+    @GetMapping("/")
+    fun index(model: Model): String {
+        return "redirect:/all"
+    }
+
+    @GetMapping("/all")
+    fun allNotes(model: Model): String {
+        model["values"] = mapOf(null to service.getAllNotes())
+        return "pages/notes_dashboard"
+    }
+
+    @GetMapping("/all/tags")
+    fun allNotesByTags(@RequestParam("custom") customTags: List<String>?, model: Model): String {
+        model["values"] = when(customTags) {
+            null -> service.getAllNotesByTags()
+            else -> mapOf(customTags to service.getAllNotes(customTags))
+        }
+        return "pages/notes_dashboard"
+    }
+
+    @GetMapping("/new")
     fun getPage(): String {
         return "pages/note_editor.html"
     }
 
-    @PostMapping("new")
+    @PostMapping("/new")
     fun createNewNote(
             @RequestParam("title") title: String,
             @RequestParam("content") content: String,
@@ -35,13 +71,13 @@ class NoteEditorController(private val service: NoteService) {
         return "redirect:/edit/${newNote.id}"
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     fun getPage(@PathVariable("id") id: Long, model: Model): String {
         service.getNoteById(id)?.let { model["note"] = it }
         return "pages/note_editor.html"
     }
 
-    @PostMapping("edit/{id}")
+    @PostMapping("/edit/{id}")
     fun submitChanges(
             @PathVariable("id") id: Long,
             @RequestParam("title") title: String,
