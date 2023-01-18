@@ -62,7 +62,8 @@ html, body {
     flex-direction: column;
 }
 
-input[type="text"], 
+input[type="text"],
+input[type="search"], 
 textarea {
     transition: outline .1s !important;
     padding: 10px !important;
@@ -71,7 +72,8 @@ textarea {
     width: 100% !important;
 }
 
-input[type="text"] {
+input[type="text"], 
+input[type="search"] {
     padding: 5px !important;
 }
 
@@ -137,6 +139,14 @@ input[type="text"] {
     border-radius: 3px;
     margin-right: 2px;
     padding: 0;
+}
+
+.search-input-container {
+    margin-bottom: 10px;
+}
+
+#search-input {
+    width: 10em;
 }
 
 /* Markdown rendering related */
