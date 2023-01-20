@@ -44,7 +44,7 @@ class NoteController(private val service: NoteService) {
     fun allNotesByTags(@RequestParam("custom") customTags: List<String>?, model: Model): String {
         model["values"] = when(customTags) {
             null -> service.getAllNotesByTags()
-            else -> mapOf(customTags to service.getAllNotes(customTags))
+            else -> mapOf(customTags to service.getAllNotes(tags = customTags))
         }
         return "pages/notes_dashboard"
     }

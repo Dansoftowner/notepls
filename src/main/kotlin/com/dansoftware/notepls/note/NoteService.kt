@@ -20,6 +20,8 @@ package com.dansoftware.notepls.note
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -34,11 +36,15 @@ class NoteService(private val repository: NoteRepository) {
      * Retrieves all notes stored in the database.
      * > Note: these notes' content is abbreviated to reduce insufficient network traffic.
      */
-    fun getAllNotes(tags: List<String>? = null): List<Note> {
-        val records = repository.findAll()
+    fun getAllNotes(
+            pageIndex: Int = 0,
+            size: Int = 0,
+            tags: List<String>? = null
+    ): Page<Note> {
+        val pageRequest = PageRequest.of(pageIndex, size)
         return tags?.let {
-            records.filter { it.tags?.containsAll(tags) ?: false }
-        } ?: records.toList()
+            repository.findByTags(it, pageRequest)
+        } ?: repository.findAll(pageRequest)
     }
 
     /**
