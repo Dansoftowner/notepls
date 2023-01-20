@@ -142,11 +142,16 @@ input[type="search"] {
 }
 
 .search-input-container {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
 }
 
 #search-input {
     width: 10em;
+    background: url(../svg/search.svg) no-repeat scroll 7px 7px;
+    padding-left: 40px !important;
 }
 
 /* Markdown rendering related */
